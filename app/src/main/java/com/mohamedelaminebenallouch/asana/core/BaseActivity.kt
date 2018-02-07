@@ -8,7 +8,6 @@ import com.mohamedelaminebenallouch.asana.core.mvp.BasePresenter
 import com.mohamedelaminebenallouch.asana.core.mvp.BaseView
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-import org.jetbrains.anko.toast
 
 abstract class BaseActivity : AppCompatActivity(), BaseView {
 
@@ -21,14 +20,10 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 
     protected abstract fun onActivityInject()
 
-    fun getAppcomponent(): AppComponent = Application.appComponent
+    fun getAppcomponent(): AppComponent = App.appComponent
 
     override fun setPresenter(presenter: BasePresenter<*>) {
         this.presenter = presenter
-    }
-
-    override fun onError() {
-        toast("Something went wrong")
     }
 
     override fun onStart() {
@@ -48,6 +43,6 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
     }
 
     @Subscribe
-    fun defaultSubscribe(event: BaseEvent) {
+    fun baseSubscribe(event: BaseEvent) {
     }
 }

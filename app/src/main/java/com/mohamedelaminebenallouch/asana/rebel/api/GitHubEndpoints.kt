@@ -1,6 +1,6 @@
 package com.mohamedelaminebenallouch.asana.rebel.api
 
-import com.burakeregar.githubsearch.home.model.RepoResponse
+import com.mohamedelaminebenallouch.asana.rebel.models.RepoResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

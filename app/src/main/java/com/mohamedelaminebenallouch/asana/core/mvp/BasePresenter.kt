@@ -1,6 +1,6 @@
 package com.mohamedelaminebenallouch.asana.core.mvp
 
-import com.base.util.SchedulerProvider
+import com.mohamedelaminebenallouch.asana.core.schedulers.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 import java.lang.ref.WeakReference
 

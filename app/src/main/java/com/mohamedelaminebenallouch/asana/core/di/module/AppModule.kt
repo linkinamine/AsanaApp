@@ -1,8 +1,8 @@
 package com.mohamedelaminebenallouch.asana.core.di.module
 
 import android.app.Application
-import com.base.util.AppSchedulerProvider
 import com.google.gson.GsonBuilder
+import com.mohamedelaminebenallouch.asana.core.schedulers.AppSchedulerProvider
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable

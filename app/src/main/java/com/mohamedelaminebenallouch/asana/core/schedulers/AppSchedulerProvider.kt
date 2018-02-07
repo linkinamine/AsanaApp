@@ -1,4 +1,4 @@
-package com.base.util
+package com.mohamedelaminebenallouch.asana.core.schedulers
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
