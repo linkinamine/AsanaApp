@@ -14,9 +14,9 @@ class NetworkModule {
         return OkHttpClient.Builder()
             .cache(cache)
             .retryOnConnectionFailure(true)
-            .connectTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(1, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES)
+            .connectTimeout(2, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
     }
 
     private class CachingControlInterceptor : Interceptor {
@@ -25,8 +25,8 @@ class NetworkModule {
 
             val requestBuilder = chain.request().newBuilder()
             val cacheControl = CacheControl.Builder()
-                .maxStale(30, TimeUnit.SECONDS)
-                .maxAge(30, TimeUnit.SECONDS)
+                .maxStale(1, TimeUnit.MINUTES)
+                .maxAge(1, TimeUnit.MINUTES)
                 .build()
 
             requestBuilder.cacheControl(cacheControl)

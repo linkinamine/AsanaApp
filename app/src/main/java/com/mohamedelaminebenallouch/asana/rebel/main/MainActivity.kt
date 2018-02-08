@@ -1,9 +1,13 @@
 package com.mohamedelaminebenallouch.asana.rebel.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import com.burakeregar.easiestgenericrecycleradapter.base.GenericAdapterBuilder
 import com.burakeregar.easiestgenericrecycleradapter.base.GenericRecyclerAdapter
 import com.mancj.materialsearchbar.MaterialSearchBar
@@ -24,6 +28,7 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
 
     private lateinit var reposAdapter: GenericRecyclerAdapter
 
+    private var repositories: List<RepoItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +51,10 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
     //MainView implementation
     override fun onSearchResponse(repos: List<RepoItem>?) {
         reposAdapter.setList(repos)
+        repositories = repos
     }
 
     override fun showProgress() {
-
         repos_rv.visibility = View.GONE
         octo_cat_iv.visibility = View.VISIBLE
         octo_cat_tv.visibility = View.VISIBLE
@@ -76,6 +81,7 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
     override fun onSearchStateChanged(enabled: Boolean) {}
 
     override fun onSearchConfirmed(text: CharSequence?) {
+        hideKeyboard()
         presenter.fetchRepos(text?.toString() ?: "")
     }
 
@@ -93,6 +99,11 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
         }
     }
 
+    private fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(search_view_msb.windowToken, 0)
+    }
+
     private fun initSearchView() {
         with(search_view_msb) {
             setOnSearchActionListener(this@MainActivity)
@@ -100,12 +111,12 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
             menu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.stars -> {
-                        //Add filtering, orderinghere
-                        presenter.fetchRepos(text?.toString() ?: "")
+                        val sortedRepos = repositories?.let { it.sortedByDescending { it.stargazersCount } }
+                        reposAdapter.setList(sortedRepos)
                     }
                     R.id.forks -> {
-                        //Add filtering, orderinghere
-                        presenter.fetchRepos(text?.toString() ?: "")
+                        val sortedRepos = repositories?.let { it.sortedByDescending { it.forksCount } }
+                        reposAdapter.setList(sortedRepos)
                     }
                 }
                 false
@@ -114,12 +125,30 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
 
     }
 
-    @Subscribe
-    fun onRowClicked(item: RepoItem) {
-        val intent = Intent(this, DetailsActivity::class.java)
-        // Pass data object in the bundle and populate details activity.
-        intent.putExtra(DetailsActivity.EXTRA_REPO_ITEM, item)
-        startActivity(intent)
+    override fun onBackPressed() {
+        super.onBackPressed()
         finish()
+    }
+
+    @Subscribe
+    fun onRowClicked(repoItemView: Pair<RepoItem, ImageView>) {
+        val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+        // Pass data object in the bundle and populate details activity.
+        intent.putExtra(DetailsActivity.EXTRA_REPO_ITEM_NAME, repoItemView.first.name)
+        intent.putExtra(DetailsActivity.EXTRA_REPO_ITEM_OWNER_NAME, repoItemView.first.owner?.login)
+        intent.putExtra(DetailsActivity.EXTRA_REPO_ITEM_OWNER_AVATAR, repoItemView.first.owner?.avatarUrl)
+        intent.putExtra(DetailsActivity.EXTRA_REPO_ITEM_OWNER_SUBSCRIBERS, repoItemView.first.subscribersUrl)
+        intent.putExtra(DetailsActivity.EXTRA_REPO_ITEM_REPO_SUBSCRIBERS_COUNT, repoItemView.first.watchersCount)
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity, repoItemView.second,
+            DetailsActivity.TRANSITION_NAME)
+
+        startActivity(intent, options.toBundle())
+    }
+
+    companion object {
+        val FETCH_BY_STARS = "FETCH_BY_STARS"
+        val FETCH_BY_FORKS = "FETCH_BY_FORKS"
+
     }
 }

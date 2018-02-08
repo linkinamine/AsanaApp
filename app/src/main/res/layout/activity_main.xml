@@ -40,7 +40,6 @@
     android:layout_height="wrap_content"
     android:layout_below="@+id/octo_cat_iv"
     android:layout_centerInParent="true"
-    android:text="@string/no_results"
     android:textSize="20sp"/>
 
 </RelativeLayout>
