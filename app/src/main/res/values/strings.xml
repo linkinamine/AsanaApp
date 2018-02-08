@@ -1,3 +1,8 @@
 <resources>
   <string name="app_name">Asana</string>
+  <string name="no_results">Octocat found no results!</string>
+  <string name="search">Click to search</string>
+  <string name="searching">Searching...</string>
+  <string name="repo_name">The repo : %1$s has %2$d subscribers!</string>
+  <string name="error_value">Couldn’t fetch this value!</string>
 </resources>

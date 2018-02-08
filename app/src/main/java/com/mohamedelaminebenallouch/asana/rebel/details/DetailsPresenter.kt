@@ -1,31 +1,29 @@
-package com.mohamedelaminebenallouch.asana.rebel.main
+package com.mohamedelaminebenallouch.asana.rebel.details
 
 import com.mohamedelaminebenallouch.asana.core.mvp.BasePresenter
 import com.mohamedelaminebenallouch.asana.core.rx.subscribeOnIo
 import com.mohamedelaminebenallouch.asana.core.schedulers.SchedulerProvider
 import com.mohamedelaminebenallouch.asana.rebel.api.GitHubEndpoints
-import com.mohamedelaminebenallouch.asana.rebel.models.RepoResponse
+import com.mohamedelaminebenallouch.asana.rebel.models.RepoOwner
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor(var api: GitHubEndpoints, disposable: CompositeDisposable, scheduler: SchedulerProvider) : BasePresenter<MainView>(disposable, scheduler) {
 
-    /**
-     *  The Rx logic is extracted to [subscribeOnIo]
-     */
+class DetailsPresenter @Inject constructor(var api: GitHubEndpoints, disposable: CompositeDisposable, scheduler: SchedulerProvider)
+    : BasePresenter<DetailsView>(disposable, scheduler) {
 
-    fun fetchRepos(searchTerm: String) {
+    fun fetchSubscribers(subscribersUrl: String) {
         view?.showProgress()
-        val observable = api.search(searchTerm)
+        val observable = api.fetchSubscribers(subscribersUrl)
         val subscription = subscribeOnIo(observable, { onSearchSuccess(it) }, { onSearchFailure() }, scheduler)
         disposable.add(subscription)
     }
 
-    private fun onSearchSuccess(result: RepoResponse) {
+    private fun onSearchSuccess(result: List<RepoOwner>) {
         view?.hideProgress()
-        view?.onSearchResponse(result.items)
+        view?.onSearchResponse(result)
 
-        if (result.items == null || result.items.isEmpty()) {
+        if (result == null || result.isEmpty()) {
             view?.noResult()
         }
 

@@ -1,11 +1,12 @@
-package com.burakeregar.githubsearch.home.model
+package com.mohamedelaminebenallouch.asana.rebel.models
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-/**
- * Created by mohamedelaminebenallouch on 05.02.18.
- */
-
+@SuppressLint("ParcelCreator")
+@Parcelize
 data class RepoItem(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
@@ -70,7 +71,7 @@ data class RepoItem(
     @SerializedName("has_wiki") val hasWiki: Boolean,
     @SerializedName("has_pages") val hasPages: Boolean,
     @SerializedName("forks_count") val forksCount: Int,
-    @SerializedName("mirror_url") val mirrorUrl: Any,
+    @SerializedName("mirror_url") val mirrorUrl: String,
     @SerializedName("archived") val archived: Boolean,
     @SerializedName("open_issues_count") val openİssuesCount: Int,
     @SerializedName("forks") val forks: Int,
@@ -78,4 +79,4 @@ data class RepoItem(
     @SerializedName("watchers") val watchers: Int,
     @SerializedName("default_branch") val defaultBranch: String,
     @SerializedName("score") val score: Double
-)
+) : Parcelable

@@ -1,4 +1,4 @@
-package com.burakeregar.githubsearch.home.model
+package com.mohamedelaminebenallouch.asana.rebel.models
 
 import com.google.gson.annotations.SerializedName
 

@@ -14,9 +14,9 @@ class NetworkModule {
         return OkHttpClient.Builder()
             .cache(cache)
             .retryOnConnectionFailure(true)
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
+            .connectTimeout(2, TimeUnit.MINUTES)
+            .readTimeout(2, TimeUnit.MINUTES)
+            .writeTimeout(2, TimeUnit.MINUTES)
     }
 
     private class CachingControlInterceptor : Interceptor {

@@ -2,7 +2,7 @@ package com.mohamedelaminebenallouch.asana.rebel.di
 
 import com.mohamedelaminebenallouch.asana.core.di.ActivityScope
 import com.mohamedelaminebenallouch.asana.core.di.component.AppComponent
-import com.mohamedelaminebenallouch.asana.rebel.MainActivity
+import com.mohamedelaminebenallouch.asana.rebel.main.MainActivity
 import dagger.Component
 
 @ActivityScope

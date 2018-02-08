@@ -1,11 +1,12 @@
 package com.mohamedelaminebenallouch.asana.core
 
 import android.app.Application
-import com.facebook.drawee.backends.pipeline.Fresco
+import com.facebook.stetho.Stetho
 import com.mohamedelaminebenallouch.asana.core.di.component.AppComponent
+import com.mohamedelaminebenallouch.asana.core.di.component.DaggerAppComponent
 import com.mohamedelaminebenallouch.asana.core.di.module.AppModule
 
-class Application : Application() {
+class App : Application() {
 
     companion object {
         @JvmStatic lateinit var appComponent: AppComponent
@@ -14,7 +15,7 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         initDagger()
-        Fresco.initialize(this)
+        Stetho.initializeWithDefaults(this)
     }
 
     private fun initDagger() {

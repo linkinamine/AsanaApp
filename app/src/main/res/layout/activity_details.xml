@@ -1,0 +1,101 @@
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_gravity="center"
+  android:background="@color/white"
+  app:cardCornerRadius="3dp"
+  app:cardElevation="6dp"
+  app:cardUseCompatPadding="true">
+
+
+  <RelativeLayout
+    android:id="@+id/details_rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="false"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
+
+    <ImageView
+      android:id="@+id/close_iv"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_alignParentEnd="true"
+      android:layout_marginTop="10dp"
+      app:srcCompat="@drawable/ic_close_black_48dp"/>
+
+    <ImageView
+      android:id="@+id/da_repo_owner_iv"
+      android:layout_width="120dp"
+      android:layout_height="120dp"
+      android:layout_below="@+id/close_iv"
+      android:layout_centerHorizontal="true"
+      android:padding="10dp"
+      android:scaleType="fitXY"
+      android:transitionName="profile"/>
+
+    <TextView
+      android:id="@+id/da_repo_owner_name_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/da_repo_owner_iv"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="5dp"
+      android:maxLines="1"
+      android:textColor="@android:color/black"
+      android:textSize="15sp"
+      tools:text="owner"/>
+
+    <TextView
+      android:id="@+id/da_repo_name_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/da_repo_owner_name_tv"
+      android:layout_centerHorizontal="true"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="25dp"
+      android:textAlignment="center"
+      android:textColor="@android:color/black"
+      android:textSize="15sp"
+      tools:text="Repo name has 100 subscribers "/>
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="2dp"
+      android:layout_below="@+id/da_repo_name_tv"
+      android:layout_margin="5dp"
+      android:background="@color/colorPrimary"/>
+
+
+    <android.support.v7.widget.RecyclerView
+      android:id="@+id/subscribers_rv"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/da_repo_name_tv"
+      android:layout_marginTop="10dp"/>
+
+    <android.support.v7.widget.AppCompatImageView
+      android:id="@+id/da_octo_cat_iv"
+      android:layout_width="160dp"
+      android:layout_height="160dp"
+      android:layout_below="@+id/da_repo_name_tv"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="10dp"
+      app:srcCompat="@drawable/ic_octocat"/>
+
+    <TextView
+      android:id="@+id/da_octo_cat_tv"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/da_octo_cat_iv"
+      android:layout_centerHorizontal="true"
+      android:textSize="20sp"/>
+
+  </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+
