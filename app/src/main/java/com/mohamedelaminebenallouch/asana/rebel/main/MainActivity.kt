@@ -24,6 +24,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionListener {
 
+
     @Inject lateinit var presenter: MainPresenter
 
     private lateinit var reposAdapter: GenericRecyclerAdapter
@@ -73,6 +74,14 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
         octo_cat_iv.visibility = View.VISIBLE
         octo_cat_tv.visibility = View.VISIBLE
         octo_cat_tv.text = getString(R.string.no_results)
+    }
+
+
+    override fun onError() {
+        repos_rv.visibility = View.GONE
+        octo_cat_iv.visibility = View.VISIBLE
+        octo_cat_tv.visibility = View.VISIBLE
+        octo_cat_tv.text = getString(R.string.error)
     }
 
     //MaterialSearchBar.OnSearchActionListener

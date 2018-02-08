@@ -1,7 +1,6 @@
 package com.mohamedelaminebenallouch.asana.rebel.details
 
 import com.mohamedelaminebenallouch.asana.core.mvp.BasePresenter
-import com.mohamedelaminebenallouch.asana.core.rx.subscribeOnIo
 import com.mohamedelaminebenallouch.asana.core.schedulers.SchedulerProvider
 import com.mohamedelaminebenallouch.asana.rebel.api.GitHubEndpoints
 import com.mohamedelaminebenallouch.asana.rebel.models.RepoOwner
@@ -15,7 +14,11 @@ class DetailsPresenter @Inject constructor(var api: GitHubEndpoints, disposable:
     fun fetchSubscribers(subscribersUrl: String) {
         view?.showProgress()
         val observable = api.fetchSubscribers(subscribersUrl)
-        val subscription = subscribeOnIo(observable, { onSearchSuccess(it) }, { onSearchFailure() }, scheduler)
+
+        val subscription = observable.subscribeOn(scheduler.io()).
+            observeOn(scheduler.ui()).
+            subscribe({ onSearchSuccess(it) }, { onSearchFailure() })
+
         disposable.add(subscription)
     }
 
@@ -31,5 +34,6 @@ class DetailsPresenter @Inject constructor(var api: GitHubEndpoints, disposable:
 
     private fun onSearchFailure() {
         view?.hideProgress()
+        view?.onError()
     }
 }
