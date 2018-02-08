@@ -42,6 +42,14 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
         presenter = null
     }
 
+    /**
+     * subscribers :
+     * 1-> [com.mohamedelaminebenallouch.asana.rebel.main.MainActivity.onRowClicked]
+     * 2-> [com.mohamedelaminebenallouch.asana.rebel.details.DetailsActivity.onRowClicked]
+     * event post :
+     * 1-> [com.mohamedelaminebenallouch.asana.rebel.main.ReposViewHolder]
+     * 2-> [com.mohamedelaminebenallouch.asana.rebel.details.SubscribersViewHolder]
+     */
     @Subscribe
     fun baseSubscribe(event: BaseEvent) {
     }

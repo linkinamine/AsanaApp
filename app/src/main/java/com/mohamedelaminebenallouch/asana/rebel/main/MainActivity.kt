@@ -155,9 +155,4 @@ class MainActivity : BaseActivity(), MainView, MaterialSearchBar.OnSearchActionL
         startActivity(intent, options.toBundle())
     }
 
-    companion object {
-        val FETCH_BY_STARS = "FETCH_BY_STARS"
-        val FETCH_BY_FORKS = "FETCH_BY_FORKS"
-
-    }
 }

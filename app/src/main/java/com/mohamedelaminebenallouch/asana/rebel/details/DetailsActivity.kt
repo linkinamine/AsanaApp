@@ -36,6 +36,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         initListeners()
     }
 
+    //Dagger Injection
     override fun onActivityInject() {
         DaggerDetailsActivityComponent.builder().appComponent(getAppcomponent())
             .detailsActivityModule(DetailsActivityModule())
@@ -45,6 +46,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         presenter.attachView(this)
     }
 
+    //DetailsView implementation
     override fun onSearchResponse(list: List<RepoOwner>?) {
         subscribersAdapter.setList(list)
     }
@@ -76,6 +78,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         da_octo_cat_tv.text = getString(R.string.error)
     }
 
+    //Private methods
     private fun initListeners() {
         close_iv.setOnClickListener { supportFinishAfterTransition() }
     }
@@ -90,6 +93,12 @@ class DetailsActivity : BaseActivity(), DetailsView {
         da_repo_name_tv.text = getString(R.string.repo_name, repoName, subscribersCount)
         da_repo_owner_name_tv.text = repoOwnerName
 
+        presenter.fetchSubscribers(subscribersUrl)
+
+        loadOwnerImage(repoOwnerAvatar)
+    }
+
+    private fun loadOwnerImage(repoOwnerAvatar: String?) {
         Picasso.with(this)
             .load(repoOwnerAvatar)
             .fit()
@@ -108,8 +117,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             da_repo_owner_iv.transitionName = TRANSITION_NAME
         }
-
-        presenter.fetchSubscribers(subscribersUrl)
     }
 
     private fun initSubscribersAdapter() {
