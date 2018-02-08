@@ -69,6 +69,13 @@ class DetailsActivity : BaseActivity(), DetailsView {
         da_octo_cat_tv.text = getString(R.string.no_results)
     }
 
+    override fun onError() {
+        subscribers_rv.visibility = View.GONE
+        da_octo_cat_iv.visibility = View.VISIBLE
+        da_octo_cat_tv.visibility = View.VISIBLE
+        da_octo_cat_tv.text = getString(R.string.error)
+    }
+
     private fun initListeners() {
         close_iv.setOnClickListener { supportFinishAfterTransition() }
     }
