@@ -1,12 +1,7 @@
 package com.mohamedelaminebenallouch.asana.rebel.models
 
-import android.annotation.SuppressLint
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
-@SuppressLint("ParcelCreator")
-@Parcelize
 data class RepoOwner(
     @SerializedName("login") val login: String,
     @SerializedName("id") val id: Int,
@@ -25,4 +20,4 @@ data class RepoOwner(
     @SerializedName("received_events_url") val receivedEventsUrl: String,
     @SerializedName("type") val type: String,
     @SerializedName("site_admin") val siteAdmin: Boolean
-) : Parcelable
+)

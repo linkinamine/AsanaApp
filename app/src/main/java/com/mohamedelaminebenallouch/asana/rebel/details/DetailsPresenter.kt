@@ -26,7 +26,7 @@ class DetailsPresenter @Inject constructor(var api: GitHubEndpoints, disposable:
         view?.hideProgress()
         view?.onSearchResponse(result)
 
-        if (result == null || result.isEmpty()) {
+        if (result.isEmpty()) {
             view?.noResult()
         }
 

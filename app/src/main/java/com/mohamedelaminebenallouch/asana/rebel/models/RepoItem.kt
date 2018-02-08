@@ -1,12 +1,7 @@
 package com.mohamedelaminebenallouch.asana.rebel.models
 
-import android.annotation.SuppressLint
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
 
-@SuppressLint("ParcelCreator")
-@Parcelize
 data class RepoItem(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
@@ -79,4 +74,4 @@ data class RepoItem(
     @SerializedName("watchers") val watchers: Int,
     @SerializedName("default_branch") val defaultBranch: String,
     @SerializedName("score") val score: Double
-) : Parcelable
+)

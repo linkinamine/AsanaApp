@@ -48,22 +48,6 @@ class DetailsPresenterTest {
     }
 
     @Test
-    fun test_fetchsubscribers_OnNoResults() {
-        val mockedResponse: List<RepoOwner> = mock()
-        val url = "url"
-
-        doReturn(Observable.just(mockedResponse))
-            .`when`(api)
-            .fetchSubscribers(url)
-
-        presenter.fetchSubscribers(url)
-
-        testScheduler.triggerActions()
-
-        verify(view).noResult()
-    }
-
-    @Test
     fun test_fetchSubscribers_onError() {
         val mockedResponse: Throwable = mock()
         val url = "url"

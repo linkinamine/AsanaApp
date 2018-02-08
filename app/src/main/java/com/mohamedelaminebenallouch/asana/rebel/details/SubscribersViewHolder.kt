@@ -13,7 +13,7 @@ class SubscribersViewHolder(itemView: View?) : GenericViewHolder<Any>(itemView) 
     override fun bindData(repoOwner: Any?) {
         item = repoOwner as RepoOwner
         with(itemView) {
-            Picasso.with(context).load(item?.avatarUrl).into(sr_repo_owner_iv)
+            Picasso.with(context).load(item.avatarUrl).into(sr_repo_owner_iv)
             sr_repo_name_tv?.text = item.login
             sr_repo_url_tv?.text = item.htmlUrl
             sr_row_repo_cv.setOnClickListener {
